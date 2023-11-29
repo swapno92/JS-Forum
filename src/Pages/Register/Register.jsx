@@ -1,14 +1,13 @@
 // import React from 'react';
 
 import { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,  useNavigate } from "react-router-dom";
 import { FcGoogle } from 'react-icons/fc';
-import swal from 'sweetalert';
 import { updateProfile } from "firebase/auth";
 import { AuthContext } from "../../Providers/AuthProvider";
 
 const Register = () => {
-    // const { signInWithGoogle } = useContext(AuthContext)
+    const navigate = useNavigate()
     const { createUser, signInWithGoogle } = useContext(AuthContext)
     // console.log(authInfo);
 
@@ -31,7 +30,7 @@ const Register = () => {
         createUser(email, password)
             .then(result => {
                 console.log(result.user);
-                swal("Good job!", "Registration Success", "success");
+                alert("Good job!", "Registration Success", "success");
 
                 updateProfile(result.user, { displayName: name })
             })
@@ -43,6 +42,7 @@ const Register = () => {
         signInWithGoogle()
             .then(result => {
                 console.log(result.user);
+                navigate('/')
             })
             .catch(error => {
                 console.error(error)

@@ -3,7 +3,7 @@
 import axios from "axios";
 
 export const axiosSecure = axios.create({
-    baseURL: 'http://localhost:5000'
+    baseURL: 'https://y-two-azure.vercel.app'
 })
 const UseAxiosSecure = () => {
     return axiosSecure

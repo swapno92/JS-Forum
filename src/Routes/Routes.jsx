@@ -7,6 +7,9 @@ import Register from "../Pages/Register/Register";
 import Dashboard from "../Layout/Dashboard";
 import Home from "../Pages/Home/Home/Home";
 import PostDetails from "../Pages/PostsDetails/PostDetails";
+import MyProfile from "../Dashboard/MyProfile/MyProfile";
+import Membership from "../Pages/Membership/Membership";
+import PrivateRoute from "../components/PrivateRoute";
 
 export const router = createBrowserRouter([
     {
@@ -22,13 +25,17 @@ export const router = createBrowserRouter([
                 element: <Login></Login>
             },
             {
+                path: '/membership',
+                element: <PrivateRoute><Membership></Membership></PrivateRoute>
+            },
+            {
                 path: '/register',
                 element: <Register></Register>
             },
             {
                 path: '/postDetails/:id',
                 element: <PostDetails></PostDetails>,
-                loader: ({ params }) => fetch(`http://localhost:5000/posts/${params.id}`)
+                loader: ({ params }) => fetch(`https://y-two-azure.vercel.app/posts/${params.id}`)
             }
         ]
     },
@@ -36,9 +43,10 @@ export const router = createBrowserRouter([
         path: '/dashboard',
         element: <Dashboard></Dashboard>,
         children: [
-            // {
-            //     path: <Dashboard
-            // }
+            {
+                path: '/dashboard',
+                element: <MyProfile></MyProfile>
+            }
         ]
     }
 ]);

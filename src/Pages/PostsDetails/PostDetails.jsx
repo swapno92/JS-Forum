@@ -16,7 +16,7 @@ const PostDetails = () => {
     const { user } = useContext(AuthContext)
 
     const [upButtonDisabled, setUpButtonDisabled] = useState(false);
-    const [downButtonDisabled, setDownButtonDisabled] = useState(true);
+    const [downButtonDisabled, setDownButtonDisabled] = useState(false);
 
     const handleUpVote = () => {
         console.log('up')
@@ -31,7 +31,7 @@ const PostDetails = () => {
         const cartId = _id
         const newVotes = { afterCount, status, cartId }
 
-        fetch('http://localhost:5000/votes', {
+        fetch('https://y-two-azure.vercel.app/votes', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -48,7 +48,7 @@ const PostDetails = () => {
 
             const vote = afterCount
             const updatePosts = {vote}
-        fetch(`http://localhost:5000/posts/${_id}`, {
+        fetch(`https://y-two-azure.vercel.app/posts/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -58,7 +58,6 @@ const PostDetails = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
-                alert('update vote')
             })
     }
 
@@ -75,7 +74,7 @@ const PostDetails = () => {
         const status = 'false';
         const newVotes = { afterCount, status,cartId }
 
-        fetch('http://localhost:5000/votes', {
+        fetch('https://y-two-azure.vercel.app/votes', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -92,7 +91,7 @@ const PostDetails = () => {
 
         const vote = afterCount
         const updatePosts = { vote }
-        fetch(`http://localhost:5000/posts/${_id}`, {
+        fetch(`https://y-two-azure.vercel.app/posts/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -102,14 +101,13 @@ const PostDetails = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
-                alert('update vote')
             })
     }
 
     const handleComment = () => [
         console.log('click')
     ]
-    
+
 
     return (
         <div>
@@ -145,7 +143,7 @@ const PostDetails = () => {
                         </div>
                         <button disabled={!user} onClick={handleComment} className={`${user ? 'bg-violet-100 border border-violet-700' : 'bg-gray-100 text-gray-400'} px-4 py-2 rounded-lg   font-semibold`}>Comment</button>
                         <div className={`${user ? 'bg-violet-100 border border-violet-700' : 'bg-gray-100 text-gray-400'} flex items-center rounded-lg  font-semibold px-4`}>
-                            <FacebookShareButton disabled={!user} url={`localhost:5173/postDetails/${_id}`}
+                            <FacebookShareButton disabled={!user} url={`https://assignment-twelve-ce342.web.app/postDetails/${_id}`}
                                 className=" flex items-center gap-x-3">
                                 <FacebookIcon className="  w-10 h-10 rounded-full"></FacebookIcon>Share
                             </FacebookShareButton>

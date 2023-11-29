@@ -2,30 +2,41 @@
 
 import { useContext } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
+import DashboardNav from "../Dashboard/DashboardNav/DashboardNav";
+import { NavLink, Outlet } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 const Dashboard = () => {
     const { user, logOut } = useContext(AuthContext)
+    const navigate = useNavigate()
 
     const handleLogOut = () => {
         logOut()
             .then(() => console.log("user looged out"))
             .catch((error) => console.error(error));
+        navigate('/')
     };
-    // console.log(user)
     return (
         <div className="flex">
             {/* left */}
-            <div className="w-4/5 line bg-gray-100"> cart</div>
+            <div className="lg:w-4/5 line bg-gray-100">
+                <DashboardNav></DashboardNav>
+                <Outlet></Outlet>
+            </div>
 
             {/* right */}
-            <div className="w-1/5 line bg-rose-100 px-3 py-8 ">
-                <div className="w-full line pl-5 py-4 rounded-lg bg-yellow-50 space-y-3 bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 text-white">
+            <div className="lg:w-1/5 line bg-teal-300 px-3 py-8 ">
+                <div className="w-full line pl-5 py-4 rounded-lg h-screen bg-gray-200 space-y-8">
                     <p><span className="font-bold text-xl">User : </span>
                         <span className="font-medium text-xl">{user?.displayName}</span>
                     </p>
-                    <p className="font-bold text-xl">Dashboard</p>
+                    <p className="font-bold text-xl">
+                        <NavLink to='/dashboard' className=' p-2 bg-gray-300 border border-gray-500 rounded-lg'>Dashboard</NavLink>
+                    </p>
+
                     <div className=" mr-5 text-center">
-                        <a onClick={handleLogOut} className="btn font-extrabold ">
+                        <a onClick={handleLogOut} className="btn font-extrabold line bg-teal-300">
                             Sign Out
                         </a>
                     </div>
