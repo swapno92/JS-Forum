@@ -1,9 +1,9 @@
 // import React from 'react';
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../Providers/AuthProvider";
-import UseAxiosSecure from "../../hooks/UseAxiosSecure";
+
 import MyPost from "./MyPost";
 import { useLoaderData } from "react-router-dom";
+import DashboardNav from "../DashboardNav/DashboardNav";
+import { useState } from "react";
 
 
 
@@ -26,11 +26,15 @@ const Myposts = () => {
     // }, [])
 
     return (
+        <>
+        <DashboardNav></DashboardNav>
         <div className=" w-4/5 mx-auto text-center text-xl mt-16">
             {
                 myPosts?.map(post => <MyPost setMyPosts={setMyPosts} myPosts={myPosts} key={post._id} post={post}></MyPost>)
             }
         </div>
+        </>
+
     );
 };
 

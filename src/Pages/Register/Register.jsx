@@ -6,12 +6,13 @@ import { FcGoogle } from 'react-icons/fc';
 import { updateProfile } from "firebase/auth";
 import { AuthContext } from "../../Providers/AuthProvider";
 import swal from "sweetalert";
-import Swal from "sweetalert2";
+import useAxiosPublick from "../../hooks/useAxiosPublick";
 
 const Register = () => {
     const navigate = useNavigate()
     const { createUser, signInWithGoogle } = useContext(AuthContext)
     // console.log(authInfo);
+    const axiosPublic = useAxiosPublick()
 
     const [error, setError] = useState('')
 
@@ -21,7 +22,7 @@ const Register = () => {
         const imageUrl = e.target.image.value
         const email = e.target.email.value;
         const password = e.target.password.value;
-        console.log(name, email, password, imageUrl);
+        // console.log(name, email, password, imageUrl);
 
         const passError = /^(?=.*[A-Z])[a-zA-Z\d]{8,}$/;
 
@@ -31,21 +32,43 @@ const Register = () => {
         }
         createUser(email, password)
             .then(result => {
-                console.log(result.user);
-                swal('"Good job!", "Registration Success", "success"');
+                // console.log(result.user);
                 updateProfile(result.user, { displayName: name, photoURL: imageUrl })
-                navigate('/')
+                    .then(() => {
+                        const userInfo = {
+                            name: name,
+                            email: email
+                        }
+                        axiosPublic.post('/users', userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    console.log('user added database')
+                                    swal('"Good job!", "Registration Success", "success"');
+                                    navigate('/')
+                                }
+                            })
+                    })
+
             })
             .catch(error => {
                 console.error(error)
             })
     }
+
     const handleWithGoogle = () => {
         signInWithGoogle()
             .then(result => {
                 console.log(result.user);
                 swal("Good job!", "Login Success.", "success");
-                navigate('/')
+                const userInfo = {
+                    email: result.user?.email,
+                    name: result.user?.displayName
+                }
+                axiosPublic.post('/users', userInfo)
+                    .then(res => {
+                        console.log(res.data)
+                        navigate('/')
+                    })
             })
             .catch(error => {
                 console.error(error)

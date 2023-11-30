@@ -2,7 +2,6 @@
 
 import { useContext } from "react";
 import { AuthContext } from "../Providers/AuthProvider";
-import DashboardNav from "../Dashboard/DashboardNav/DashboardNav";
 import { NavLink, Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
@@ -10,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 const Dashboard = () => {
     const { user, logOut } = useContext(AuthContext)
     const navigate = useNavigate()
+    const isAdmin = true
 
     const handleLogOut = () => {
         logOut()
@@ -17,11 +17,13 @@ const Dashboard = () => {
             .catch((error) => console.error(error));
         navigate('/')
     };
+
+   
     return (
         <div className="md:flex">
             {/* left */}
             <div className="lg:w-4/5 line bg-gray-100">
-                <DashboardNav></DashboardNav>
+                {/* <DashboardNav></DashboardNav> */}
                 <Outlet></Outlet>
             </div>
 
@@ -31,10 +33,16 @@ const Dashboard = () => {
                     <p><span className="font-bold text-xl">User : </span>
                         <span className="font-medium text-xl">{user?.displayName}</span>
                     </p>
-                    <p className="font-bold text-xl">
-                        <NavLink to='/dashboard' className=' p-2 bg-gray-300 border border-gray-500 rounded-lg'>Dashboard</NavLink>
-                    </p>
-
+                    {
+                        isAdmin ?
+                            <button className="font-bold text-xl">
+                                <NavLink to="/dashboard/admDashboard/admProfile" className=' p-2 bg-gray-300 border border-gray-500 rounded-lg'>Dashboard</NavLink>
+                            </button>
+                            :
+                            <button className="font-bold text-xl">
+                                <div className=' bg-gray-300 text-gray-400 p-2 border border-gray-100 rounded-lg'>Dashboard</div>
+                            </button>
+                    }
                     <div className=" mr-5 text-center">
                         <a onClick={handleLogOut} className="btn font-extrabold line bg-teal-300">
                             Sign Out

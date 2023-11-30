@@ -18,7 +18,7 @@ const Comu = ({com}) => {
                 })
         }, [])
     // }
-    console.log(commm?.comment)
+    // console.log(commm?.comment)
 
     return (
         <div className="flex">

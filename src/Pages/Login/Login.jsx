@@ -5,12 +5,14 @@ import { Link, useNavigate } from "react-router-dom";
 import swal from 'sweetalert';
 import { FcGoogle } from 'react-icons/fc';
 import { AuthContext } from "../../Providers/AuthProvider";
+import useAxiosPublick from "../../hooks/useAxiosPublick";
 
 const Login = () => {
 
     const { signInUser, signInWithGoogle } = useContext(AuthContext)
     const navigate = useNavigate()
     const [error, setError] = useState([])
+    const axiosPublic = useAxiosPublick()
     // console.log(error);
 
     const handleLogin = e => {
@@ -37,7 +39,15 @@ const Login = () => {
             .then(result => {
                 console.log(result.user);
                 swal("Good job!", "Login Success.", "success");
-                navigate('/')
+                const userInfo = {
+                    email: result.user?.email,
+                    name: result.user?.displayName
+                }
+                axiosPublic.post('/users', userInfo)
+                    .then(res => {
+                        console.log(res.data)
+                        navigate('/')
+                    })
             })
             .catch(error => {
                 console.error(error)

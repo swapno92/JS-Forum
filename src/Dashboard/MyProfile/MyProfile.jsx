@@ -6,6 +6,7 @@ import { GiGoldStack } from "react-icons/gi";
 import { FaMedal } from "react-icons/fa";
 import UseAxiosSecure from "../../hooks/UseAxiosSecure";
 import ThreePost from "./ThreePost";
+import DashboardNav from "../DashboardNav/DashboardNav";
 
 
 const MyProfile = () => {
@@ -24,6 +25,7 @@ const MyProfile = () => {
 
     return (
         <>
+        <DashboardNav></DashboardNav>
             <div className="lg:w-[50%] md:w-[80%] mt-4 mx-auto line space-y-4 py-4 rounded-lg bg-green-100">
                 <div className="flex justify-center"><img src={user?.photoURL} alt="" className="w-28 rounded-full border-2 border-black" /></div>
                 <h2 className="text-xl font-bold text-center">{user?.displayName}</h2>

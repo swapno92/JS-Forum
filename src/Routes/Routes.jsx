@@ -13,11 +13,16 @@ import PrivateRoute from "../components/PrivateRoute";
 import Myposts from "../Dashboard/MyPosts/Myposts";
 import AddPosts from "../Dashboard/AddPosts/AddPosts";
 import Comments from "../Pages/Comments/Comments";
+import AdminProfile from "../Dashboard/AdminProfile/AdminProfile";
+import ManageUsers from "../Dashboard/ManageUsers/ManageUsers";
+import ErrorPage from "../Pages/ErrorPage/Errorpage";
 
 export const router = createBrowserRouter([
     {
         path: "/",
         element: <Main></Main>,
+        errorElement: <ErrorPage></ErrorPage>,
+
         children: [
             {
                 path: '/',
@@ -56,7 +61,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/myPosts/:email',
-                element: <Myposts></Myposts>,
+                element: <PrivateRoute><Myposts></Myposts></PrivateRoute>,
                 loader: ({ params }) => fetch(`http://localhost:5000/post/${params.email}`)
 
             },
@@ -65,7 +70,15 @@ export const router = createBrowserRouter([
                 element: <Comments></Comments>,
                 loader: ({ params }) => fetch(`http://localhost:5000/comments/${params.title}`)
 
+            },
+            {
+                path:'/dashboard/admDashboard/admProfile',
+                element: <PrivateRoute><AdminProfile></AdminProfile></PrivateRoute>
+            },
+            {
+                path: '/dashboard/admDashboard/manageUsers',
+                element: <ManageUsers></ManageUsers>
             }
         ]
-    }
+    },
 ]);

@@ -5,6 +5,7 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import swal from "sweetalert";
 import UseAxiosSecure from "../../hooks/UseAxiosSecure";
 import { Link } from "react-router-dom";
+import DashboardNav from "../DashboardNav/DashboardNav";
 
 const AddPosts = () => {
 
@@ -52,6 +53,7 @@ const AddPosts = () => {
 
     return (
         <>
+        <DashboardNav></DashboardNav>
 
             {/* add to card */}
             <form className={` ${myPosts.length > 4 ? 'hidden' : 'block'} `} onSubmit={handleAdded}>
