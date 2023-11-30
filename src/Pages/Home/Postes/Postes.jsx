@@ -5,14 +5,14 @@ import UseAxiosSecure from "../../../hooks/UseAxiosSecure";
 import Post from "../Post/Post";
 
 const Postes = () => {
-    const [posts, setPosts] = useState([])
-    const axiosSecure = UseAxiosSecure()
-    useEffect(() => {
-        axiosSecure.get('/posts')
-            .then(res => {
-                setPosts(res.data)
-            })
-    }, [])
+    // const [posts, setPosts] = useState([])
+    // const axiosSecure = UseAxiosSecure()
+    // useEffect(() => {
+    //     axiosSecure.get('/posts')
+    //         .then(res => {
+    //             setPosts(res.data)
+    //         })
+    // }, [])
     // console.log(posts)
 
 
@@ -32,16 +32,17 @@ const Postes = () => {
 
 
     return (
-        <div className="mx-auto w-[95%] rounded-lg  bg-slate-200 border border-slate-400">
-            <div className="flex justify-center pt-4 "><button onClick={handleSorting} className="btn btn-info">Sort by Popularity</button></div>
-            <div id="hidden" className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-3 p-4">
+        <></>
+        // <div className="mx-auto w-[95%] rounded-lg  bg-slate-200 border border-slate-400">
+        //     <div className="flex justify-center pt-4 "><button onClick={handleSorting} className="btn btn-info">Sort by Popularity</button></div>
+        //     <div id="hidden" className="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-3 p-4">
 
-                {
-                    posts.map(post => <Post key={post._id} post={post}></Post>)
-                }
+        //         {
+        //             posts.map(post => <Post key={post._id} post={post}></Post>)
+        //         }
 
-            </div>
-        </div>
+        //     </div>
+        // </div>
     );
 };
 

@@ -20,93 +20,126 @@ const PostDetails = () => {
 
     const handleUpVote = () => {
         console.log('up')
-        const countStringBefore = document.getElementById('count')
-        const countString = document.getElementById('count').innerText
-        const count = parseInt(countString)
-        const afterCount = count + 1
-        countStringBefore.innerText = afterCount
-        setUpButtonDisabled(true);
-        setDownButtonDisabled(false)
-        const status = 'true';
-        const cartId = _id
-        const newVotes = { afterCount, status, cartId }
+        if (!user) {
+            toast('please login')
+        }
+        else {
+            const countStringBefore = document.getElementById('count')
+            const countString = document.getElementById('count').innerText
+            const count = parseInt(countString)
+            const afterCount = count + 1
+            countStringBefore.innerText = afterCount
+            setUpButtonDisabled(true);
+            setDownButtonDisabled(false)
+            const status = 'true';
+            const cartId = _id
+            const newVotes = { afterCount, status, cartId }
 
-        fetch('https://y-two-azure.vercel.app/votes', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(newVotes)
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                if (data.insertedId) {
-                    toast('You Have Up Voted')
-                }
+            fetch('http://localhost:5000/votes', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(newVotes)
             })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    if (data.insertedId) {
+                        toast('You Have Up Voted')
+                    }
+                })
 
             const vote = afterCount
-            const updatePosts = {vote}
-        fetch(`https://y-two-azure.vercel.app/posts/${_id}`, {
-            method: 'PUT',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(updatePosts)
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
+            const updatePosts = { vote }
+            fetch(`http://localhost:5000/posts/${_id}`, {
+                method: 'PUT',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(updatePosts)
             })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                })
+        }
     }
 
     const handleDownVote = () => {
         console.log('down')
-        const countStringBefore = document.getElementById('count')
-        const countString = document.getElementById('count').innerText
-        const count = parseInt(countString)
-        const afterCount = count - 1
-        countStringBefore.innerText = afterCount
-        setDownButtonDisabled(true);
-        setUpButtonDisabled(false)
-        const cartId = _id
-        const status = 'false';
-        const newVotes = { afterCount, status,cartId }
+        if (!user) {
+            toast('please login')
+        }
+        else {
+            const countStringBefore = document.getElementById('count')
+            const countString = document.getElementById('count').innerText
+            const count = parseInt(countString)
+            const afterCount = count - 1
+            countStringBefore.innerText = afterCount
+            setDownButtonDisabled(true);
+            setUpButtonDisabled(false)
+            const cartId = _id
+            const status = 'false';
+            const newVotes = { afterCount, status, cartId }
 
-        fetch('https://y-two-azure.vercel.app/votes', {
+            fetch('http://localhost:5000/votes', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(newVotes)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    if (data.insertedId) {
+                        toast('You Have Down Voted')
+                    }
+                })
+
+            const vote = afterCount
+            const updatePosts = { vote }
+            fetch(`http://localhost:5000/posts/${_id}`, {
+                method: 'PUT',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(updatePosts)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                })
+        }
+    }
+
+    const handleComment = () => {
+        console.log('comment click')
+        const comment = document.getElementById('comment').value
+        // console.log(comment)
+        const email = user.email
+        const titleID = _id
+        // console.log(email)
+
+        const newComment = { comment, title,titleID,  email }
+        // console.log(comment,title)
+
+        fetch('http://localhost:5000/comments', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(newVotes)
+            body: JSON.stringify(newComment)
         })
             .then(res => res.json())
             .then(data => {
                 console.log(data)
                 if (data.insertedId) {
-                    toast('You Have Down Voted')
+                    toast('You comment successfully')
                 }
             })
-
-        const vote = afterCount
-        const updatePosts = { vote }
-        fetch(`https://y-two-azure.vercel.app/posts/${_id}`, {
-            method: 'PUT',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(updatePosts)
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-            })
     }
-
-    const handleComment = () => [
-        console.log('click')
-    ]
 
 
     return (
@@ -127,7 +160,7 @@ const PostDetails = () => {
                 </div>
                 <div className=' col-span-3 rounded-lg bg-teal-50 border border-purple-600 p-4 '>
                     <div className="flex justify-center rounded-lg p-4 ">
-                        <textarea className="line rounded-lg pt-4 px-7" placeholder="Comment here..." name="" id="" cols={100} rows="3"></textarea>
+                        <textarea className="line rounded-lg pt-4 px-7" id='comment' placeholder="Comment here..." name="comment" cols={100} rows="3"></textarea>
                     </div>
                     <div className=" flex justify-around">
                         <div className="line flex items-center gap-2 px-4 rounded-lg py-1 bg-violet-100 border border-violet-700">

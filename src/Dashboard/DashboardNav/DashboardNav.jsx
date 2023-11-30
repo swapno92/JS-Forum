@@ -1,18 +1,23 @@
 // import React from 'react';
 
+import { useContext } from "react";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../../Providers/AuthProvider";
 
 const DashboardNav = () => {
+    const {user} = useContext(AuthContext)
+    const {email} = user
+    // console.log(email)
     const items = (
         <>
             <li className={` text-lg font-semibold `}>
-                <NavLink to="/dashboard">My Profile</NavLink>
+                <NavLink to="/dashboard/myProfile">My Profile</NavLink>
             </li>
             <li className={` text-lg font-semibold`}>
-                <NavLink to="/membership">Add Post</NavLink>
+                <NavLink to="/dashboard/addPosts">Add Post</NavLink>
             </li>
             <li className={` text-lg font-semibold`}>
-                <NavLink to="/membership">My Posts</NavLink>
+                <NavLink to={`/dashboard/myPosts/${email}`}>My Posts</NavLink>
             </li>
         </>
     )

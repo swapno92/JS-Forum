@@ -1,10 +1,12 @@
 // import React from 'react';
 
 import { useContext, useState } from "react";
-import { Link,  useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from 'react-icons/fc';
 import { updateProfile } from "firebase/auth";
 import { AuthContext } from "../../Providers/AuthProvider";
+import swal from "sweetalert";
+import Swal from "sweetalert2";
 
 const Register = () => {
     const navigate = useNavigate()
@@ -30,9 +32,9 @@ const Register = () => {
         createUser(email, password)
             .then(result => {
                 console.log(result.user);
-                alert("Good job!", "Registration Success", "success");
-
-                updateProfile(result.user, { displayName: name })
+                swal('"Good job!", "Registration Success", "success"');
+                updateProfile(result.user, { displayName: name, photoURL: imageUrl })
+                navigate('/')
             })
             .catch(error => {
                 console.error(error)
@@ -42,6 +44,7 @@ const Register = () => {
         signInWithGoogle()
             .then(result => {
                 console.log(result.user);
+                swal("Good job!", "Login Success.", "success");
                 navigate('/')
             })
             .catch(error => {

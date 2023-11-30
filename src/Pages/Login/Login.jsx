@@ -16,7 +16,7 @@ const Login = () => {
     const handleLogin = e => {
         e.preventDefault()
         const email = e.target.email.value;
-        const password = e.target.password.value;
+        const password = e.target.password.value; 
         console.log(email, password);
 
         signInUser(email, password)
@@ -36,6 +36,7 @@ const Login = () => {
         signInWithGoogle()
             .then(result => {
                 console.log(result.user);
+                swal("Good job!", "Login Success.", "success");
                 navigate('/')
             })
             .catch(error => {

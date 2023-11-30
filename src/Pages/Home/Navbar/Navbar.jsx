@@ -72,7 +72,7 @@ const Navbar = () => {
             <div className="navbar-end">
                 {user ? (
                     <>
-                        <Link to='/dashboard'>
+                        <Link to='/dashboard/myProfile'>
                             <img className="w-10 mr-2 h-10 rounded-full" title={user.displayName} src={user.photoURL} />
                         </Link>
                         {/* <span className="mx-3 bg-gray-300 px-2 py-3 rounded lg">
@@ -81,9 +81,7 @@ const Navbar = () => {
                     </>
                 ) : (
                     <>
-                        <Link to="/login">
-                            <button className={` text-lg font-semibold `}>Login</button>
-                        </Link>
+                        
                     </>
                 )}
             </div>

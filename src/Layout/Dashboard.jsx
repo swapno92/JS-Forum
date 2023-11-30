@@ -18,7 +18,7 @@ const Dashboard = () => {
         navigate('/')
     };
     return (
-        <div className="flex">
+        <div className="md:flex">
             {/* left */}
             <div className="lg:w-4/5 line bg-gray-100">
                 <DashboardNav></DashboardNav>

@@ -10,6 +10,9 @@ import PostDetails from "../Pages/PostsDetails/PostDetails";
 import MyProfile from "../Dashboard/MyProfile/MyProfile";
 import Membership from "../Pages/Membership/Membership";
 import PrivateRoute from "../components/PrivateRoute";
+import Myposts from "../Dashboard/MyPosts/Myposts";
+import AddPosts from "../Dashboard/AddPosts/AddPosts";
+import Comments from "../Pages/Comments/Comments";
 
 export const router = createBrowserRouter([
     {
@@ -35,17 +38,33 @@ export const router = createBrowserRouter([
             {
                 path: '/postDetails/:id',
                 element: <PostDetails></PostDetails>,
-                loader: ({ params }) => fetch(`https://y-two-azure.vercel.app/posts/${params.id}`)
+                loader: ({ params }) => fetch(`http://localhost:5000/posts/${params.id}`)
             }
         ]
     },
     {
         path: '/dashboard',
-        element: <Dashboard></Dashboard>,
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         children: [
             {
-                path: '/dashboard',
+                path: '/dashboard/myProfile',
                 element: <MyProfile></MyProfile>
+            },
+            {
+                path: '/dashboard/addPosts',
+                element: <AddPosts></AddPosts>
+            },
+            {
+                path: '/dashboard/myPosts/:email',
+                element: <Myposts></Myposts>,
+                loader: ({ params }) => fetch(`http://localhost:5000/post/${params.email}`)
+
+            },
+            {
+                path: '/dashboard/myPosts/comments/:title',
+                element: <Comments></Comments>,
+                loader: ({ params }) => fetch(`http://localhost:5000/comments/${params.title}`)
+
             }
         ]
     }
