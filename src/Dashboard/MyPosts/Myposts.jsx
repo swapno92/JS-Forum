@@ -33,6 +33,7 @@ const Myposts = () => {
                 myPosts?.map(post => <MyPost setMyPosts={setMyPosts} myPosts={myPosts} key={post._id} post={post}></MyPost>)
             }
         </div>
+            
         </>
 
     );

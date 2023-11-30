@@ -7,6 +7,7 @@ import { FaMedal } from "react-icons/fa";
 import UseAxiosSecure from "../../hooks/UseAxiosSecure";
 import ThreePost from "./ThreePost";
 import DashboardNav from "../DashboardNav/DashboardNav";
+import Myposts from "../MyPosts/Myposts";
 
 
 const MyProfile = () => {
@@ -25,7 +26,7 @@ const MyProfile = () => {
 
     return (
         <>
-        <DashboardNav></DashboardNav>
+            <DashboardNav></DashboardNav>
             <div className="lg:w-[50%] md:w-[80%] mt-4 mx-auto line space-y-4 py-4 rounded-lg bg-green-100">
                 <div className="flex justify-center"><img src={user?.photoURL} alt="" className="w-28 rounded-full border-2 border-black" /></div>
                 <h2 className="text-xl font-bold text-center">{user?.displayName}</h2>
@@ -49,6 +50,9 @@ const MyProfile = () => {
                         myPosts?.map(post => <ThreePost key={post._id} post={post}></ThreePost>)
                     }
 
+                </div>
+                <div className={` ${Myposts.length === 0 ? 'block' : 'hidden'} flex flex-col justify-center py-4 mb-4 items-center `}>
+                    <button className="btn line bg-yellow-200 text-xl">You have no Post</button>
                 </div>
             </div>
         </>
