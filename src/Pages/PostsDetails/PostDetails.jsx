@@ -35,7 +35,7 @@ const PostDetails = () => {
             const cartId = _id
             const newVotes = { afterCount, status, cartId }
 
-            fetch('http://localhost:5000/votes', {
+            fetch('https://y-two-azure.vercel.app/votes', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -52,7 +52,7 @@ const PostDetails = () => {
 
             const vote = afterCount
             const updatePosts = { vote }
-            fetch(`http://localhost:5000/posts/${_id}`, {
+            fetch(`https://y-two-azure.vercel.app/posts/${_id}`, {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json'
@@ -83,7 +83,7 @@ const PostDetails = () => {
             const status = 'false';
             const newVotes = { afterCount, status, cartId }
 
-            fetch('http://localhost:5000/votes', {
+            fetch('https://y-two-azure.vercel.app/votes', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -100,7 +100,7 @@ const PostDetails = () => {
 
             const vote = afterCount
             const updatePosts = { vote }
-            fetch(`http://localhost:5000/posts/${_id}`, {
+            fetch(`https://y-two-azure.vercel.app/posts/${_id}`, {
                 method: 'PUT',
                 headers: {
                     'content-type': 'application/json'
@@ -125,7 +125,7 @@ const PostDetails = () => {
         const newComment = { comment, title,titleID,  email }
         // console.log(comment,title)
 
-        fetch('http://localhost:5000/comments', {
+        fetch('https://y-two-azure.vercel.app/comments', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

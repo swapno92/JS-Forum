@@ -25,7 +25,7 @@ const AddPosts = () => {
         const author = { authorName, authorImage, authorEmail, title, tag, description, postTime, vote };
         console.log(author)
 
-        fetch("http://localhost:5000/posts", {
+        fetch("https://y-two-azure.vercel.app/posts", {
             method: "POST",
             headers: {
                 "content-type": "application/json",

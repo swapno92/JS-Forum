@@ -22,7 +22,7 @@ const MyPost = ({ post, myPosts, setMyPosts }) => {
             }).then((result) => {
                 if (result.isConfirmed) {
 
-                    fetch(`http://localhost:5000/posts/${_id}`, {
+                    fetch(`https://y-two-azure.vercel.app/posts/${_id}`, {
                         method: 'DELETE'
                     })
                         .then(res => res.json())

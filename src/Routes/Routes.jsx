@@ -43,7 +43,7 @@ export const router = createBrowserRouter([
             {
                 path: '/postDetails/:id',
                 element: <PostDetails></PostDetails>,
-                loader: ({ params }) => fetch(`http://localhost:5000/posts/${params.id}`)
+                loader: ({ params }) => fetch(`https://y-two-azure.vercel.app/posts/${params.id}`)
             }
         ]
     },
@@ -62,13 +62,13 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/myPosts/:email',
                 element: <PrivateRoute><Myposts></Myposts></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/post/${params.email}`)
+                loader: ({ params }) => fetch(`https://y-two-azure.vercel.app/post/${params.email}`)
 
             },
             {
                 path: '/dashboard/myPosts/comments/:title',
                 element: <Comments></Comments>,
-                loader: ({ params }) => fetch(`http://localhost:5000/comments/${params.title}`)
+                loader: ({ params }) => fetch(`https://y-two-azure.vercel.app/comments/${params.title}`)
 
             },
             {
