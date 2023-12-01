@@ -10,7 +10,7 @@ const Navbar = () => {
     const { user } = useContext(AuthContext);
     // console.log(user.email)
 
-   
+
 
     const items = (
         // {`${user ? 'block' : "hidden"}`}
@@ -25,7 +25,7 @@ const Navbar = () => {
             <li className="">
                 <MdNotificationsActive className="text-6xl" />
             </li>
-            <li className={` text-lg font-semibold `}>
+            <li className={`${user ? 'hidden' : 'block'} text-lg font-semibold `}>
                 <NavLink to="/login">Join US</NavLink>
             </li>
         </>
@@ -81,7 +81,7 @@ const Navbar = () => {
                     </>
                 ) : (
                     <>
-                        
+
                     </>
                 )}
             </div>

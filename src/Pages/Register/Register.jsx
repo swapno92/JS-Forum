@@ -23,11 +23,26 @@ const Register = () => {
         const email = e.target.email.value;
         const password = e.target.password.value;
         // console.log(name, email, password, imageUrl);
+        setError("")
 
-        const passError = /^(?=.*[A-Z])[a-zA-Z\d]{8,}$/;
+        // if (!/^.{6,}$/.test(password)) {
+        //     setError("password must be 6 character");
+        //     return;
+        // }
+        // if (!/.*[A-Z].*/.test(password)) {
+        //     setError("password must 1 capital letter");
+        //     return;
+        // }
+
+        // if (!/.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\|\-=].*/.test(password)) {
+        //     setError("password must be 1 special character");
+        //     return;
+        // }
+
+        const passError = /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/;
 
         if (!passError.test(password)) {
-            setError("password must be 6 character,one uppercase and one special character");
+            setError("password must be 6 character,one uppercase, one lowercase and one special character");
             return;
         }
         createUser(email, password)
