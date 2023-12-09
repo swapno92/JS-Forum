@@ -10,3 +10,8 @@ Currently, two official plugins are available:
 
 ## 💻 Using Technologies for this project
 [![My Skills](https://skillicons.dev/icons?i=js,react,firebase,nodejs,mongodb,tailwind,html,vite)](https://skillicons.dev)
+
+## Our Project Features -
+- The tags related to each question are given in the All Tags section of the js forum website.
+- Clicking the short by popularity button will serialize the cards according to their time
+If the user is loggd in then the member page will open
